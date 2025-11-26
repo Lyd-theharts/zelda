@@ -1,0 +1,11 @@
+.card:hover{
+  border-color: blueviolet;
+  cursor: pointer;
+  transition: .8s;
+}
+
+.card{
+  border-width: 3px;
+  border-color: #eeeeee;
+  transition: .6s;
+}

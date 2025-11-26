@@ -1,0 +1,94 @@
+<div class="container mt-4">
+  <!-- Botón Volver -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <button class="btn btn-outline-success" routerLink="/equipment">
+        ← Volver a Equipment
+      </button>
+    </div>
+  </div>
+
+  @if (equipmentData()) {
+    <div class="row">
+      <!-- Columna Imagen -->
+      <div class="col-md-5 mb-4">
+        <div class="card border-success">
+          <div class="card-body text-center">
+            <img [src]="equipmentData()!.image"
+                 [alt]="equipmentData()!.name"
+                 class="img-fluid rounded">
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Información -->
+      <div class="col-md-7">
+        <div class="card border-success">
+          <div class="card-header bg-success text-white">
+            <h1 class="card-title mb-0 h3">{{ equipmentData()!.name }}</h1>
+          </div>
+          <div class="card-body">
+            <!-- Información Básica -->
+            <div class="row mb-3">
+              <div class="col-sm-6">
+                <p class="mb-2"><strong>ID:</strong> <span class="badge bg-secondary">{{ equipmentData()!.id }}</span></p>
+              </div>
+              <div class="col-sm-6">
+                <p class="mb-2"><strong>Categoría:</strong> <span class="badge bg-success">{{ equipmentData()!.category }}</span></p>
+              </div>
+            </div>
+
+            <!-- Descripción -->
+            <div class="mb-3">
+              <h5 class="text-success">Descripción</h5>
+              <p class="card-text">{{ equipmentData()!.description }}</p>
+            </div>
+
+            <!-- Propiedades -->
+            <div class="row mb-3">
+              <div class="col-sm-6">
+                <p class="mb-2"><strong>DLC:</strong>
+                  <span [class]="equipmentData()!.dlc ? 'badge bg-warning text-dark ms-2' : 'badge bg-secondary ms-2'">
+                    {{ equipmentData()!.dlc ? 'Sí' : 'No' }}
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Estadísticas -->
+            <div class="mb-3">
+              <h5 class="text-success">Estadísticas</h5>
+              <div class="row">
+                @if (equipmentData()?.properties?.attack) {
+                  <div class="col-sm-6">
+                    <p class="mb-2"><strong>Ataque:</strong>
+                      <span class="badge bg-danger ms-2">{{ equipmentData()?.properties?.attack }}</span>
+                    </p>
+                  </div>
+                }
+                @if (equipmentData()?.properties?.defense) {
+                  <div class="col-sm-6">
+                    <p class="mb-2"><strong>Defensa:</strong>
+                      <span class="badge bg-success ms-2">{{ equipmentData()?.properties?.defense }}</span>
+                    </p>
+                  </div>
+                }
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- Loading -->
+    <div class="row">
+      <div class="col-12 text-center py-5">
+        <div class="spinner-border text-success" role="status">
+          <span class="visually-hidden">Cargando equipo...</span>
+        </div>
+        <p class="mt-2 text-muted">Cargando información del equipo...</p>
+      </div>
+    </div>
+  }
+</div>

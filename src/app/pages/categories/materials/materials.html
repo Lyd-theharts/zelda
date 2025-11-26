@@ -1,0 +1,27 @@
+@if (materialsList()) {
+  <div class="container">
+    <div class="row">
+
+
+      @for (equipment of materialsList(); track equipment.id) {
+        <div class="col-4" [routerLink]="'/materials-detail/' + equipment.id">
+          <div class="card bg-success my-3">
+            <div class="card-header">
+              <h3 class="text-white">{{ equipment.name }}</h3>
+            </div>
+            <div class="card-body text-center">
+              <img [src]="equipment.image" [alt]="equipment.name" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+} @else {
+  <div class="loading-container">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+}

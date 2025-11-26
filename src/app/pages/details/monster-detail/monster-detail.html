@@ -1,0 +1,97 @@
+<div class="container mt-4">
+  <!-- Botón Volver -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <button class="btn btn-outline-success" routerLink="/monsters">
+        ← Volver a Monstruos
+      </button>
+    </div>
+  </div>
+
+  @if (monsterData()) {
+    <div class="row">
+      <!-- Columna Imagen -->
+      <div class="col-md-5 mb-4">
+        <div class="card border-success">
+          <div class="card-body text-center">
+            <img [src]="monsterData()!.image"
+                 [alt]="monsterData()!.name"
+                 class="img-fluid rounded">
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Información -->
+      <div class="col-md-7">
+        <div class="card border-success">
+          <div class="card-header bg-success text-white">
+            <h1 class="card-title mb-0 h3">{{ monsterData()!.name }}</h1>
+          </div>
+          <div class="card-body">
+            <!-- Información Básica -->
+            <div class="row mb-3">
+              <div class="col-sm-6">
+                <p class="mb-2"><strong>ID:</strong> <span class="badge bg-secondary">{{ monsterData()!.id }}</span></p>
+              </div>
+              <div class="col-sm-6">
+                <p class="mb-2"><strong>Categoría:</strong> <span class="badge bg-success">{{ monsterData()!.category }}</span></p>
+              </div>
+            </div>
+
+            <!-- Descripción -->
+            <div class="mb-3">
+              <h5 class="text-success">Descripción</h5>
+              <p class="card-text">{{ monsterData()!.description }}</p>
+            </div>
+
+            <!-- Propiedades -->
+            <div class="row mb-3">
+              <div class="col-sm-6">
+                <p class="mb-2"><strong>DLC:</strong>
+                  <span [class]="monsterData()!.dlc ? 'badge bg-warning text-dark ms-2' : 'badge bg-secondary ms-2'">
+                    {{ monsterData()!.dlc ? 'Sí' : 'No' }}
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Drops -->
+            @if (monsterData()?.drops && monsterData()?.drops!.length > 0) {
+              <div class="mb-3">
+                <h5 class="text-success">Botín</h5>
+                <div class="d-flex flex-wrap gap-2">
+                  @for (drop of monsterData()!.drops; track drop) {
+                    <span class="badge bg-danger">{{ drop }}</span>
+                  }
+                </div>
+              </div>
+            }
+
+            <!-- Ubicaciones Comunes -->
+            @if (monsterData()?.common_locations && monsterData()?.common_locations!.length > 0) {
+              <div class="mb-3">
+                <h5 class="text-success">Ubicaciones Comunes</h5>
+                <div class="d-flex flex-wrap gap-2">
+                  @for (location of monsterData()!.common_locations; track location) {
+                    <span class="badge bg-info text-dark">{{ location }}</span>
+                  }
+                </div>
+              </div>
+            }
+
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- Loading -->
+    <div class="row">
+      <div class="col-12 text-center py-5">
+        <div class="spinner-border text-success" role="status">
+          <span class="visually-hidden">Cargando monstruo...</span>
+        </div>
+        <p class="mt-2 text-muted">Cargando información del monstruo...</p>
+      </div>
+    </div>
+  }
+</div>
